@@ -1,28 +1,24 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
-import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/faculty")
 public class FacultyController {
-    FacultyService facultyService;
+    private final FacultyService facultyService;
 
     public FacultyController(FacultyService facultyService) {
         this.facultyService = facultyService;
     }
 
-    @GetMapping("{id}")
-    public Faculty getFacultyInfo(@PathVariable long id) {
+    @GetMapping("/id")
+    public Faculty getFacultyInfo(@RequestParam long id) {
         return facultyService.findFaculty(id);
-    }
-
-    @GetMapping("/sortColor")
-    public HashMap<Long, Faculty> sortFaculty(@RequestParam String sortColor) {
-        return facultyService.sortFaculty(sortColor);
     }
 
     @PostMapping
@@ -36,8 +32,14 @@ public class FacultyController {
     }
 
     @DeleteMapping("{id}")
-    public Faculty deleteFaculty(@PathVariable long id) {
-        return facultyService.deleteFaculty(id);
+    public ResponseEntity deleteFaculty(@PathVariable long id) {
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("{sortColor}")
+    public List<Faculty> sortFaculty(@PathVariable String sortColor) {
+        return facultyService.sortFaculty(sortColor);
     }
 
 
