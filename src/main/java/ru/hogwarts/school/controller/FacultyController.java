@@ -10,10 +10,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/faculty")
 public class FacultyController {
-    private final FacultyService facultyService;
 
-    public FacultyController(FacultyService facultyService) {
-        this.facultyService = facultyService;
+    @GetMapping("/findAllByName")
+    public List<Faculty> findAllByName(@RequestParam String name) {
+        return facultyService.findFacultyByNameContainsIgnoreCase(name);
+    }
+
+    @GetMapping("/findAllByColor")
+    public List<Faculty> findAllByColor(@RequestParam String color) {
+        return facultyService.findFacultyByColorIgnoreCase(color);
     }
 
     @GetMapping("/id")
@@ -43,4 +48,9 @@ public class FacultyController {
     }
 
 
+    private final FacultyService facultyService;
+
+    public FacultyController(FacultyService facultyService) {
+        this.facultyService = facultyService;
+    }
 }
