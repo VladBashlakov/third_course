@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -32,7 +33,7 @@ public class AvatarService {
     private String avatarsDir;
 
     public Avatar findAvatar(long id) {
-        return avatarRepository.findAvatarById(id);
+        return avatarRepository.findById(id).orElse(new Avatar());
     }
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
         Student student = studentRepository.getById(studentId);
