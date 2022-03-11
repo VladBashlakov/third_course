@@ -11,12 +11,11 @@ import java.util.List;
 
 @Service
 public class FacultyService {
-    public List<Faculty> findFacultyByColorIgnoreCase(String color) {
-        return facultyRepository.findFacultyByColorIgnoreCase(color);
-    }
 
-    public List<Faculty> findFacultyByNameContainsIgnoreCase(String name) {
-        return facultyRepository.findFacultyByNameContainsIgnoreCase(name);
+    private final FacultyRepository facultyRepository;
+
+    public FacultyService(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
     }
 
     public Faculty createFaculty(Faculty faculty) {
@@ -37,12 +36,6 @@ public class FacultyService {
 
     public List<Faculty> sortFaculty(String color) {
         return facultyRepository.findByColor(color);
-    }
-
-    private final FacultyRepository facultyRepository;
-
-    public FacultyService(FacultyRepository facultyRepository) {
-        this.facultyRepository = facultyRepository;
     }
 }
 
