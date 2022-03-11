@@ -19,7 +19,7 @@ public class StudentByCategoryController {
 
     @GetMapping("/count-all")
     public Integer getCountOfAllStudents() {
-        return studentService.findAll().size();
+        return studentService.getCountOfAllStudents();
     }
 
     @GetMapping("/avg-age")

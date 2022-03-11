@@ -42,7 +42,7 @@ public class StudentService {
         return studentRepository.findByAgeBetween(min, max);
     }
 
-    public List<Student> findAll() {
+    public Integer getCountOfAllStudents() {
         return studentRepository.getCountOfAll();
     }
     public int getAverageAge() {
