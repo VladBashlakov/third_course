@@ -28,6 +28,11 @@ public class StudentController {
         return studentService.sortStudent(sortAge);
     }
 
+    @GetMapping
+    public List<Student> findByAgeBetween(@RequestParam int min, @RequestParam int max) {
+        return studentService.findByAgeBetween(min, max);
+    }
+
     @PostMapping
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
