@@ -37,22 +37,22 @@ public class AvatarService {
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
-    Logger logger = LoggerFactory.getLogger(FacultyService.class);
+
 
     public List<Avatar> getAll(Integer pageNumber, Integer pageSize) {
-        logger.info("getAll completed");
+
 
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
         return avatarRepository.findAll(pageRequest).getContent();
     }
 
     public Avatar findAvatar(long id) {
-        logger.info("findAvatar completed");
+
         return avatarRepository.findById(id).orElse(new Avatar());
     }
 
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
-        logger.info("uploadAvatar completed");
+
         Student student = studentRepository.getById(studentId);
         Path filePath = Path.of(avatarsDir, student + "." + getExtensions(Objects.requireNonNull(avatarFile.getOriginalFilename())));
         Files.createDirectories(filePath.getParent());
@@ -75,7 +75,7 @@ public class AvatarService {
     }
 
     private String getExtensions(String fileName) {
-        logger.info("getExtensions completed");
+
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
