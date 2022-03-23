@@ -19,34 +19,42 @@ public class StudentService {
 
 
     public Student createStudent(Student student) {
+
         return studentRepository.save(student);
     }
 
     public Student findStudent(long id) {
+
         return studentRepository.findById(id).get();
     }
 
     public Student editStudent(Student student) {
+
         return studentRepository.save(student);
     }
 
     public void deleteStudent(long id) {
+
         studentRepository.deleteById(id);
     }
 
     public List<Student> sortStudent(int age) {
+
         return studentRepository.findByAge(age);
     }
 
     public List<Student> findByAgeBetween(int min, int max) {
+
         return studentRepository.findByAgeBetween(min, max);
     }
 
     public List<Student> findAll() {
+
         return studentRepository.getCountOfAll();
     }
 
     public int getAverageAge() {
+
         return studentRepository.getAverageAge();
     }
 

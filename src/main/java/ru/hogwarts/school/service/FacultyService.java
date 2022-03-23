@@ -29,14 +29,17 @@ public class FacultyService {
     }
 
     public Faculty editFaculty(Faculty faculty) {
+
         return facultyRepository.save(faculty);
     }
 
     public void deleteFaculty(long id) {
+
         facultyRepository.deleteById(id);
     }
 
     public List<Faculty> sortFaculty(String color) {
+
         return facultyRepository.findByColor(color);
     }
 

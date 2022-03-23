@@ -34,8 +34,9 @@ public class AvatarService {
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
-
     public List<Avatar> getAll(Integer pageNumber, Integer pageSize) {
+
+
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
         return avatarRepository.findAll(pageRequest).getContent();
     }
