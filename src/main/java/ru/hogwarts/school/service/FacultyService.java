@@ -1,7 +1,5 @@
 package ru.hogwarts.school.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 
@@ -23,12 +21,10 @@ public class FacultyService {
 
 
     public Faculty createFaculty(Faculty faculty) {
-
         return facultyRepository.save(faculty);
     }
 
     public Faculty findFaculty(long id) {
-
         return facultyRepository.findById(id).get();
     }
 
@@ -52,6 +48,7 @@ public class FacultyService {
     public FacultyService(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;
     }
+
 }
 
 

@@ -1,7 +1,5 @@
 package ru.hogwarts.school.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
@@ -18,7 +16,6 @@ public class StudentService {
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
-
 
 
     public Student createStudent(Student student) {
@@ -62,7 +59,6 @@ public class StudentService {
     }
 
     public List<Student> getLastFiveStudent() {
-
         return studentRepository.getFiveLastStudents();
     }
 }

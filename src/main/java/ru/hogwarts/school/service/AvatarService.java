@@ -1,7 +1,5 @@
 package ru.hogwarts.school.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -37,8 +34,6 @@ public class AvatarService {
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
-
-
     public List<Avatar> getAll(Integer pageNumber, Integer pageSize) {
 
 
@@ -47,12 +42,10 @@ public class AvatarService {
     }
 
     public Avatar findAvatar(long id) {
-
         return avatarRepository.findById(id).orElse(new Avatar());
     }
 
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
-
         Student student = studentRepository.getById(studentId);
         Path filePath = Path.of(avatarsDir, student + "." + getExtensions(Objects.requireNonNull(avatarFile.getOriginalFilename())));
         Files.createDirectories(filePath.getParent());
@@ -75,7 +68,6 @@ public class AvatarService {
     }
 
     private String getExtensions(String fileName) {
-
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
