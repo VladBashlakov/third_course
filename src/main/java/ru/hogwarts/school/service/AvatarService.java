@@ -1,7 +1,5 @@
 package ru.hogwarts.school.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -37,22 +34,17 @@ public class AvatarService {
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
-    Logger logger = LoggerFactory.getLogger(FacultyService.class);
 
     public List<Avatar> getAll(Integer pageNumber, Integer pageSize) {
-        logger.info("getAll completed");
-
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
         return avatarRepository.findAll(pageRequest).getContent();
     }
 
     public Avatar findAvatar(long id) {
-        logger.info("findAvatar completed");
         return avatarRepository.findById(id).orElse(new Avatar());
     }
 
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
-        logger.info("uploadAvatar completed");
         Student student = studentRepository.getById(studentId);
         Path filePath = Path.of(avatarsDir, student + "." + getExtensions(Objects.requireNonNull(avatarFile.getOriginalFilename())));
         Files.createDirectories(filePath.getParent());
@@ -75,7 +67,6 @@ public class AvatarService {
     }
 
     private String getExtensions(String fileName) {
-        logger.info("getExtensions completed");
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
