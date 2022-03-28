@@ -11,6 +11,11 @@ import java.util.List;
 @RequestMapping("/faculty")
 public class FacultyController {
 
+    @GetMapping("/findTheLongestNameOfFaculty")
+        public String findTheLongestNameOfFaculty() {
+            return facultyService.findTheLongestNameOfFaculty();
+    }
+
     @GetMapping("/findAllByName")
     public List<Faculty> findAllByName(@RequestParam String name) {
         return facultyService.findFacultyByNameContainsIgnoreCase(name);

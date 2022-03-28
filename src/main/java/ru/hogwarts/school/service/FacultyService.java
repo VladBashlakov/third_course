@@ -8,12 +8,21 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 
 
+import java.util.Comparator;
 import java.util.List;
 
 
 @Service
 public class FacultyService {
-   private final Logger logger = LoggerFactory.getLogger(FacultyService.class);
+
+    public String findTheLongestNameOfFaculty() {
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElse(null);
+    }
+
+    private final Logger logger = LoggerFactory.getLogger(FacultyService.class);
 
     public List<Faculty> findFacultyByColorIgnoreCase(String color) {
         logger.info("findFacultyByColorIgnoreCase completed");
@@ -56,7 +65,6 @@ public class FacultyService {
     public FacultyService(FacultyRepository facultyRepository) {
         this.facultyRepository = facultyRepository;
     }
-
 }
 
 
