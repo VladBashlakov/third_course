@@ -12,10 +12,14 @@ import java.util.List;
 @RequestMapping("/student")
 public class StudentController {
 
-    private final StudentService studentService;
+    @GetMapping("/AgeAVG")
+    public int getAVGAgeOfStudents() {
+        return studentService.getAVGAgeOfStudents();
+    }
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
+    @GetMapping("/filterByLetterA")
+    public List<String> getAllStudentNamesAfterFilterByA() {
+        return studentService.getAllStudentNamesAfterFilterByA();
     }
 
     @GetMapping("/id")
@@ -48,4 +52,10 @@ public class StudentController {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    private final StudentService studentService;
 }
