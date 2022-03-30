@@ -12,6 +12,22 @@ import java.util.List;
 @RequestMapping("/student")
 public class StudentController {
 
+    @GetMapping("/getAllStudentsByStreams")
+    public void getAllStudents() {
+        studentService.getAllStudentsByStreams();
+    }
+
+    @GetMapping("/getAllStudentsBySynchroStreams")
+    public void getAllStudentsBySynchroStreams() {
+        studentService.getAllStudentsBySynchroStreams();
+    }
+
+    @GetMapping("/getAllStudentsTest")
+    public void getAllStudentsTest() {
+        studentService.getAllStudentsTest();
+    }
+
+
     @GetMapping("/AgeAVG")
     public int getAVGAgeOfStudents() {
         return studentService.getAVGAgeOfStudents();
