@@ -10,16 +10,17 @@ import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public class FacultyService {
 
-    public String findTheLongestNameOfFaculty() {
-        return facultyRepository.findAll().stream()
+    public Optional findTheLongestNameOfFaculty() {
+        return Optional.of(facultyRepository.findAll().stream()
                 .map(Faculty::getName)
-                .max(Comparator.comparingInt(String::length))
-                .orElse(null);
+                .max(Comparator.comparingInt(String::length)));
+
     }
 
     private final Logger logger = LoggerFactory.getLogger(FacultyService.class);

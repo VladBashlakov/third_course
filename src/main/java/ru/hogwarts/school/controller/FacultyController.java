@@ -6,13 +6,14 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/faculty")
 public class FacultyController {
 
     @GetMapping("/findTheLongestNameOfFaculty")
-        public String findTheLongestNameOfFaculty() {
+        public Optional findTheLongestNameOfFaculty() {
             return facultyService.findTheLongestNameOfFaculty();
     }
 
@@ -58,4 +59,7 @@ public class FacultyController {
     public FacultyController(FacultyService facultyService) {
         this.facultyService = facultyService;
     }
+
+
+
 }
