@@ -13,11 +13,52 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private final Logger logger = LoggerFactory.getLogger(StudentService.class);
-    private final StudentRepository studentRepository;
 
-    public StudentService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public void getAllStudentsBySynchroStreams() {
+
+        synchronized (StudentRepository.class) {
+            System.out.println(studentRepository.findById(0L));
+            System.out.println(studentRepository.findById(1L));
+        }
+
+        new Thread(() -> {
+            synchronized (StudentRepository.class) {
+                System.out.println(studentRepository.findById(2L));
+                System.out.println(studentRepository.findById(3L));
+            }
+        }).start();
+
+        new Thread(() -> {
+            synchronized (StudentRepository.class) {
+                System.out.println(studentRepository.findById(3L));
+                System.out.println(studentRepository.findById(4L));
+            }
+        }).start();
+
+    }
+
+
+    public void getAllStudentsByStreams() {
+
+        System.out.println(studentRepository.findById(0L));
+        System.out.println(studentRepository.findById(1L));
+
+        new Thread(() -> {
+            System.out.println(studentRepository.findById(1L));
+            System.out.println(studentRepository.findById(2L));
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(studentRepository.findById(4L));
+            System.out.println(studentRepository.findById(5L));
+        }).start();
+
+    }
+
+    public void getAllStudentsTest() {
+        for (int i = 0; i < findAll().size(); i++) {
+            System.out.println(findAll().get(i));
+        }
     }
 
 
@@ -80,5 +121,13 @@ public class StudentService {
                 .mapToInt(Student::getAge)
                 .average()
                 .orElse(0);
+    }
+
+    private final Logger logger = LoggerFactory.getLogger(StudentService.class);
+
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 }
